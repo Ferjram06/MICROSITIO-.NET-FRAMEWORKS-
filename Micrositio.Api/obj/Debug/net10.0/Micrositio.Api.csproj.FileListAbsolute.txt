@@ -31,3 +31,4 @@ C:\Users\joshp\Documents\Programacion WEB\MICROSITIO-.NET-FRAMEWORKS-\Micrositio
 C:\Users\joshp\Documents\Programacion WEB\MICROSITIO-.NET-FRAMEWORKS-\Micrositio.Api\obj\Debug\net10.0\Micrositio.Api.pdb
 C:\Users\joshp\Documents\Programacion WEB\MICROSITIO-.NET-FRAMEWORKS-\Micrositio.Api\obj\Debug\net10.0\Micrositio.Api.genruntimeconfig.cache
 C:\Users\joshp\Documents\Programacion WEB\MICROSITIO-.NET-FRAMEWORKS-\Micrositio.Api\obj\Debug\net10.0\ref\Micrositio.Api.dll
+C:\Users\joshp\Documents\Programacion WEB\MICROSITIO-.NET-FRAMEWORKS-\Micrositio.Api\obj\Debug\net10.0\Micrositio.Api.sourcelink.json

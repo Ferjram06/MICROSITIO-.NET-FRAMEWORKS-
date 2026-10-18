@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Micrositio.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+374b51eadd3956c918f7455b10f4e40d22aad75c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Micrositio.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Micrositio.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
