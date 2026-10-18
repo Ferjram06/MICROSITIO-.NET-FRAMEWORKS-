@@ -1,0 +1,6 @@
+@Micrositio.Api_HostAddress = http://localhost:5064
+
+GET {{Micrositio.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
