@@ -1,87 +1,20 @@
-
 <header class="site-header">
-  <a class="brand" href="/" aria-label="Campus Guía, inicio">
+  <a class="brand" routerLink="/inicio" aria-label="Campus Guía, inicio">
     <span class="brand-icon">C</span>
     <span>Campus Guía</span>
   </a>
 
   <nav class="main-nav" aria-label="Navegación principal">
-    <a href="#inicio">Inicio</a>
-    <a href="#recursos">Recursos</a>
-    <a href="#actividades">Actividades</a>
-    <a href="#acerca">Acerca de</a>
+    <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
+    <a routerLink="/recursos" routerLinkActive="active">Recursos</a>
+    <a routerLink="/actividades" routerLinkActive="active">Actividades</a>
+    <a routerLink="/explorador" routerLinkActive="active">Explorador</a>
+    <a routerLink="/acerca" routerLinkActive="active">Acerca de</a>
   </nav>
 </header>
 
-<main>
-  <section class="hero" id="inicio">
-    <div class="hero-content">
-      <p class="eyebrow">TU VIDA UNIVERSITARIA, MÁS SENCILLA</p>
-
-      <h1>Todo para avanzar en tu carrera.</h1>
-
-      <p class="hero-description">
-        Encuentra recursos académicos, descubre actividades
-        y aprovecha mejor tu experiencia universitaria.
-      </p>
-
-      <div class="hero-actions">
-        <a class="button button-primary" href="#recursos">
-          Explorar recursos
-        </a>
-
-        <a class="button button-secondary" href="#actividades">
-          Ver actividades
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-card" aria-hidden="true">
-      <span class="hero-card-icon">✦</span>
-      <p class="hero-card-label">TU ESPACIO ACADÉMICO</p>
-      <p class="hero-card-title">Aprende. Explora. Avanza.</p>
-      <div class="hero-decoration"></div>
-    </div>
-  </section>
-
-  <section class="resources section-container" id="recursos">
-    <div class="section-heading">
-      <p class="eyebrow">EMPIEZA POR AQUÍ</p>
-      <h2>¿Qué necesitas hoy?</h2>
-      <p>Accede rápidamente a las áreas principales de la guía.</p>
-    </div>
-
-    <div class="resource-grid">
-      <article class="resource-card">
-        <span class="resource-icon">01</span>
-        <h3>Recursos académicos</h3>
-        <p>Materiales y herramientas para apoyar tus estudios.</p>
-        <a href="#acerca">Conocer más →</a>
-      </article>
-
-      <article class="resource-card" id="actividades">
-        <span class="resource-icon">02</span>
-        <h3>Actividades</h3>
-        <p>Descubre talleres, eventos y oportunidades universitarias.</p>
-        <a href="#acerca">Conocer más →</a>
-      </article>
-
-      <article class="resource-card">
-        <span class="resource-icon">03</span>
-        <h3>Explorador</h3>
-        <p>Encuentra información según tus intereses académicos.</p>
-        <a href="#acerca">Conocer más →</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="about section-container" id="acerca">
-    <h2>Un punto de partida para tu vida universitaria.</h2>
-    <p>
-      Campus Guía es un micrositio académico desarrollado
-      como práctica de integración de frameworks web.
-    </p>
-  </section>
+<main class="page-container">
+  <router-outlet />
 </main>
 
 <footer class="site-footer">
