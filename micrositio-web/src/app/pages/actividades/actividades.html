@@ -6,21 +6,30 @@
     Descubre oportunidades para aprender, colaborar y desarrollar habilidades.
   </p>
 
-  @if (actividades$ | async; as actividades) {
-    <div class="resource-grid">
-      @for (actividad of actividades; track actividad.id) {
-        <article class="resource-card">
-          <span class="resource-icon">
-            {{ actividad.id.toString().padStart(2, '0') }}
-          </span>
+  @if (estado$ | async; as estado) {
+    @if (estado.status === 'loading') {
+      <p role="status">Cargando actividades universitarias...</p>
+    } @else if (estado.status === 'error') {
+      <div role="alert">
+        <p>{{ estado.mensaje }}</p>
+        <button type="button" (click)="reintentar()">
+          Intentar de nuevo
+        </button>
+      </div>
+    } @else {
+      <div class="resource-grid">
+        @for (actividad of estado.actividades; track actividad.id) {
+          <article class="resource-card">
+            <span class="resource-icon">
+              {{ actividad.id.toString().padStart(2, '0') }}
+            </span>
 
-          <h2>{{ actividad.titulo }}</h2>
-          <p>{{ actividad.categoria }}</p>
-          <p>{{ actividad.descripcion }}</p>
-        </article>
-      }
-    </div>
-  } @else {
-    <p>Cargando actividades universitarias...</p>
+            <h2>{{ actividad.titulo }}</h2>
+            <p>{{ actividad.categoria }}</p>
+            <p>{{ actividad.descripcion }}</p>
+          </article>
+        }
+      </div>
+    }
   }
 </section>

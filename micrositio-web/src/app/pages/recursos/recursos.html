@@ -6,27 +6,37 @@
     Herramientas para organizarte, aprender y desarrollar tus proyectos.
   </p>
 
-  @if (recursos$ | async; as recursos) {
-    <div class="resource-grid">
-      @for (recurso of recursos; track recurso.id) {
-        <article class="resource-card">
-          <span class="resource-icon">
-            {{ recurso.id.toString().padStart(2, '0') }}
-          </span>
+  @if (estado$ | async; as estado) {
+    @if (estado.status === 'loading') {
+      <p role="status">Cargando recursos académicos...</p>
+    } @else if (estado.status === 'error') {
+      <div role="alert">
+        <p>{{ estado.mensaje }}</p>
+        <button type="button" (click)="reintentar()">
+          Intentar de nuevo
+        </button>
+      </div>
+    } @else {
+      <div class="resource-grid">
+        @for (recurso of estado.recursos; track recurso.id) {
+          <article class="resource-card">
+            <span class="resource-icon">
+              {{ recurso.id.toString().padStart(2, '0') }}
+            </span>
 
-          <h2>{{ recurso.titulo }}</h2>
-          <p>{{ recurso.categoria }}</p>
-          <p>{{ recurso.descripcion }}</p>
+            <h2>{{ recurso.titulo }}</h2>
+            <p>{{ recurso.categoria }}</p>
+            <p>{{ recurso.descripcion }}</p>
 
-          <a [href]="recurso.url"
-             target="_blank"
-             rel="noopener noreferrer">
-            Consultar recurso →
-          </a>
-        </article>
-      }
-    </div>
-  } @else {
-    <p>Cargando recursos académicos...</p>
+            <a
+              [href]="recurso.url"
+              target="_blank"
+              rel="noopener noreferrer">
+              Consultar recurso →
+            </a>
+          </article>
+        }
+      </div>
+    }
   }
 </section>
