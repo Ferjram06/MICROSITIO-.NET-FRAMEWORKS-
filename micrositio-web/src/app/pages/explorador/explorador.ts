@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-explorador',
-  styleUrl: './explorador.css',
+  imports: [RouterLink],
   templateUrl: './explorador.html',
+  styleUrl: './explorador.css',
 })
 export class Explorador {}

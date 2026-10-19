@@ -320,3 +320,38 @@ a {
     padding: 40px 0 56px;
   }
 }
+/* Ajustes de la cuadrícula del Explorador */
+.content-page .resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.content-page .resource-card {
+  width: 100%;
+  min-width: 0;
+  padding: 24px;
+  overflow-wrap: break-word;
+}
+
+.content-page .resource-card h2 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.content-page .resource-card p {
+  line-height: 1.7;
+}
+
+.content-page .resource-card a {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .content-page .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
