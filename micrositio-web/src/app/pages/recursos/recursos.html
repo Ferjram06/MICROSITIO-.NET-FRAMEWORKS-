@@ -1,3 +1,4 @@
+
 <section class="content-page">
   <p class="eyebrow">APOYO PARA TUS ESTUDIOS</p>
   <h1>Recursos académicos</h1>
@@ -5,30 +6,27 @@
     Herramientas para organizarte, aprender y desarrollar tus proyectos.
   </p>
 
-  <div class="resource-grid">
-    <article class="resource-card">
-      <span class="resource-icon">01</span>
-      <h2>Programación</h2>
-      <p>Practica lógica, algoritmos y desarrollo de aplicaciones.</p>
-      <a href="https://developer.mozilla.org/es/" target="_blank" rel="noopener noreferrer">
-        Consultar documentación →
-      </a>
-    </article>
+  @if (recursos$ | async; as recursos) {
+    <div class="resource-grid">
+      @for (recurso of recursos; track recurso.id) {
+        <article class="resource-card">
+          <span class="resource-icon">
+            {{ recurso.id.toString().padStart(2, '0') }}
+          </span>
 
-    <article class="resource-card">
-      <span class="resource-icon">02</span>
-      <h2>Matemáticas</h2>
-      <p>Repasa conceptos y explora explicaciones interactivas.</p>
-      <a href="https://es.khanacademy.org/" target="_blank" rel="noopener noreferrer">
-        Estudiar matemáticas →
-      </a>
-    </article>
+          <h2>{{ recurso.titulo }}</h2>
+          <p>{{ recurso.categoria }}</p>
+          <p>{{ recurso.descripcion }}</p>
 
-    <article class="resource-card">
-      <span class="resource-icon">03</span>
-      <h2>Organización</h2>
-      <p>Planifica tareas, entregas y sesiones de estudio.</p>
-      <a routerLink="/explorador">Explorar herramientas →</a>
-    </article>
-  </div>
+          <a [href]="recurso.url"
+             target="_blank"
+             rel="noopener noreferrer">
+            Consultar recurso →
+          </a>
+        </article>
+      }
+    </div>
+  } @else {
+    <p>Cargando recursos académicos...</p>
+  }
 </section>

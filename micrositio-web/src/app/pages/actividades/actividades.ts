@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { CampusApi } from '../../services/campus-api';
 
 @Component({
-  imports: [],
   selector: 'app-actividades',
-  styleUrl: './actividades.css',
+  imports: [AsyncPipe],
   templateUrl: './actividades.html',
+  styleUrl: './actividades.css',
 })
-export class Actividades {}
+export class Actividades {
+  private readonly api = inject(CampusApi);
+
+  readonly actividades$ = this.api.obtenerActividades();
+}
