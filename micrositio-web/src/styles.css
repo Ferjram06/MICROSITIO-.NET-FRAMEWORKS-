@@ -1,3 +1,6 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/typography.css";
 
 :host {
   display: block;
@@ -354,4 +357,68 @@ a {
   .content-page .resource-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ========================================
+   COMPONENTE REACT — CAMPUS GUÍA
+   ======================================== */
+
+.react-widget {
+  position: relative;
+  margin-top: 36px;
+  padding: 30px;
+  overflow: hidden;
+  border: 1px solid #dce8ee;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #edf5f8 100%);
+  color: #172b4d;
+  box-shadow: 0 8px 24px rgba(18, 59, 82, 0.06);
+}
+
+.react-widget span {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #176b87;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.react-widget h2 {
+  margin: 0 0 12px;
+  color: #123b52;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.react-widget p {
+  max-width: 600px;
+  margin: 0 0 22px;
+  color: #52627a;
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.react-widget button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 9px;
+  background: #176b87;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.react-widget button:hover {
+  background: #10546c;
+  transform: translateY(-2px);
+}
+
+.react-widget button:focus-visible {
+  outline: 3px solid #7ed4d1;
+  outline-offset: 3px;
 }

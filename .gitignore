@@ -1,0 +1,17 @@
+﻿# .NET: archivos generados
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Node.js y Angular
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
