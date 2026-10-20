@@ -6,6 +6,86 @@
     Herramientas para organizarte, aprender y desarrollar tus proyectos.
   </p>
 
+  <div class="resource-actions">
+    <input
+      type="search"
+      name="busqueda"
+      placeholder="Buscar por título, categoría o descripción..."
+      aria-label="Buscar recursos académicos"
+      [ngModel]="busqueda"
+      (ngModelChange)="buscar($event)"
+    />
+
+    <button type="button" (click)="abrirFormulario()">
+      + Agregar recurso
+    </button>
+  </div>
+
+  @if (formularioVisible) {
+    <form class="resource-form" #form="ngForm"
+      (ngSubmit)="guardarRecurso()">
+
+      <h2>
+        {{ recursoEditandoId === null
+          ? 'Nuevo recurso'
+          : 'Editar recurso' }}
+      </h2>
+
+      <label for="titulo">Título</label>
+      <input
+        id="titulo"
+        name="titulo"
+        [(ngModel)]="nuevoRecurso.titulo"
+        required
+      />
+
+      <label for="categoria">Categoría</label>
+      <input
+        id="categoria"
+        name="categoria"
+        [(ngModel)]="nuevoRecurso.categoria"
+        required
+      />
+
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        [(ngModel)]="nuevoRecurso.descripcion"
+        required
+      ></textarea>
+
+      <label for="url">URL del recurso</label>
+      <input
+        id="url"
+        name="url"
+        type="url"
+        [(ngModel)]="nuevoRecurso.url"
+        required
+      />
+
+      @if (mensajeAccion) {
+        <p role="alert">{{ mensajeAccion }}</p>
+      }
+
+      <button
+        type="submit"
+        [disabled]="form.invalid || guardando"
+      >
+        {{ guardando ? 'Guardando...' :
+          recursoEditandoId === null ? 'Crear recurso' : 'Guardar cambios' }}
+      </button>
+
+      <button type="button" (click)="cancelarFormulario()">
+        Cancelar
+      </button>
+    </form>
+  }
+
+  @if (mensajeAccion && !formularioVisible) {
+    <p role="alert">{{ mensajeAccion }}</p>
+  }
+
   @if (estado$ | async; as estado) {
     @if (estado.status === 'loading') {
       <p role="status">Cargando recursos académicos...</p>
@@ -17,6 +97,10 @@
         </button>
       </div>
     } @else {
+      @if (estado.recursos.length === 0) {
+        <p>No encontramos recursos con esa búsqueda.</p>
+      }
+
       <div class="resource-grid">
         @for (recurso of estado.recursos; track recurso.id) {
           <article class="resource-card">
@@ -31,9 +115,19 @@
             <a
               [href]="recurso.url"
               target="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer"
+            >
               Consultar recurso →
             </a>
+
+            <div class="resource-card-actions">
+              <button type="button" (click)="editar(recurso)">
+                Editar
+              </button>
+              <button type="button" (click)="eliminar(recurso)">
+                Eliminar
+              </button>
+            </div>
           </article>
         }
       </div>

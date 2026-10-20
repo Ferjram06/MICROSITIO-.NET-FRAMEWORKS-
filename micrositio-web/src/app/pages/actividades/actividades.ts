@@ -1,11 +1,13 @@
-
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CampusApi } from '../../services/campus-api';
 import {
   Subject,
   catchError,
+  debounceTime,
   map,
+  merge,
   of,
   startWith,
   switchMap
@@ -13,18 +15,28 @@ import {
 
 @Component({
   selector: 'app-actividades',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, FormsModule],
   templateUrl: './actividades.html',
   styleUrl: './actividades.css',
 })
 export class Actividades {
   private readonly api = inject(CampusApi);
+  private readonly busqueda$ = new Subject<string>();
   private readonly recargar$ = new Subject<void>();
 
-  readonly estado$ = this.recargar$.pipe(
-    startWith(undefined),
-    switchMap(() =>
-      this.api.obtenerActividades().pipe(
+  busqueda = '';
+
+  readonly estado$ = merge(
+    this.busqueda$.pipe(
+      startWith(''),
+      debounceTime(250)
+    ),
+    this.recargar$.pipe(
+      map(() => this.busqueda)
+    )
+  ).pipe(
+    switchMap(busqueda =>
+      this.api.obtenerActividades(busqueda).pipe(
         map(actividades => ({
           status: 'success' as const,
           actividades
@@ -41,6 +53,11 @@ export class Actividades {
       )
     )
   );
+
+  buscar(valor: string): void {
+    this.busqueda = valor;
+    this.busqueda$.next(valor);
+  }
 
   reintentar(): void {
     this.recargar$.next();

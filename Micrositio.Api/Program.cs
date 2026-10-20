@@ -1,9 +1,11 @@
+using Micrositio.Api.Models;
+using Micrositio.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de OpenAPI
 builder.Services.AddOpenApi();
+builder.Services.AddSingleton<ICampusService, CampusService>();
 
-// Permitir que Angular consulte la API desde localhost:4200
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularFrontend", policy =>
@@ -17,80 +19,77 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Documentación de la API
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// Habilitar las solicitudes desde Angular
 app.UseCors("AngularFrontend");
 
-// Endpoint: recursos académicos
-app.MapGet("/api/recursos", () =>
-{
-    var recursos = new[]
+// Consultar y buscar recursos
+app.MapGet("/api/recursos",
+    (string? busqueda, ICampusService service) =>
+        Results.Ok(service.ObtenerRecursos(busqueda)))
+    .WithName("GetRecursos");
+
+// Consultar un recurso por ID
+app.MapGet("/api/recursos/{id:int}",
+    (int id, ICampusService service) =>
     {
-        new
-        {
-            Id = 1,
-            Titulo = "Programación web",
-            Categoria = "Tecnología",
-            Descripcion = "Documentación y herramientas para desarrollar aplicaciones web.",
-            Url = "https://developer.mozilla.org/es/"
-        },
-        new
-        {
-            Id = 2,
-            Titulo = "Matemáticas",
-            Categoria = "Ciencias exactas",
-            Descripcion = "Materiales para estudiar matemáticas y resolver problemas.",
-            Url = "https://es.khanacademy.org/"
-        },
-        new
-        {
-            Id = 3,
-            Titulo = "Organización académica",
-            Categoria = "Vida universitaria",
-            Descripcion = "Ideas y herramientas para organizar tareas y sesiones de estudio.",
-            Url = "https://support.microsoft.com/es-es"
-        }
-    };
+        var recurso = service.ObtenerRecursoPorId(id);
 
-    return Results.Ok(recursos);
-})
-.WithName("GetRecursos");
+        return recurso is null
+            ? Results.NotFound()
+            : Results.Ok(recurso);
+    });
 
-// Endpoint: actividades universitarias
-app.MapGet("/api/actividades", () =>
-{
-    var actividades = new[]
+// Crear un recurso
+app.MapPost("/api/recursos",
+    (Recurso recurso, ICampusService service) =>
     {
-        new
-        {
-            Id = 1,
-            Titulo = "Talleres tecnológicos",
-            Categoria = "Académica",
-            Descripcion = "Actividades prácticas para desarrollar habilidades tecnológicas."
-        },
-        new
-        {
-            Id = 2,
-            Titulo = "Proyectos colaborativos",
-            Categoria = "Comunidad",
-            Descripcion = "Oportunidades para aprender trabajando en equipo."
-        },
-        new
-        {
-            Id = 3,
-            Titulo = "Actividades deportivas y culturales",
-            Categoria = "Desarrollo personal",
-            Descripcion = "Alternativas para complementar la formación universitaria."
-        }
-    };
+        if (!DatosValidos(recurso))
+            return Results.BadRequest(
+                new { mensaje = "Completa todos los campos y proporciona una URL válida." });
 
-    return Results.Ok(actividades);
-})
-.WithName("GetActividades");
+        var creado = service.CrearRecurso(recurso);
+
+        return Results.Created($"/api/recursos/{creado.Id}", creado);
+    });
+
+// Actualizar un recurso
+app.MapPut("/api/recursos/{id:int}",
+    (int id, Recurso recurso, ICampusService service) =>
+    {
+        if (!DatosValidos(recurso))
+            return Results.BadRequest(
+                new { mensaje = "Los datos del recurso no son válidos." });
+
+        return service.ActualizarRecurso(id, recurso)
+            ? Results.NoContent()
+            : Results.NotFound();
+    });
+
+// Eliminar un recurso
+app.MapDelete("/api/recursos/{id:int}",
+    (int id, ICampusService service) =>
+        service.EliminarRecurso(id)
+            ? Results.NoContent()
+            : Results.NotFound());
+
+// Consultar y buscar actividades
+app.MapGet("/api/actividades",
+    (string? busqueda, ICampusService service) =>
+        Results.Ok(service.ObtenerActividades(busqueda)))
+    .WithName("GetActividades");
 
 app.Run();
+
+static bool DatosValidos(Recurso recurso)
+{
+    return !string.IsNullOrWhiteSpace(recurso.Titulo)
+        && !string.IsNullOrWhiteSpace(recurso.Categoria)
+        && !string.IsNullOrWhiteSpace(recurso.Descripcion)
+        && Uri.TryCreate(recurso.Url, UriKind.Absolute, out var uri)
+        && (uri.Scheme == Uri.UriSchemeHttp
+            || uri.Scheme == Uri.UriSchemeHttps);
+}

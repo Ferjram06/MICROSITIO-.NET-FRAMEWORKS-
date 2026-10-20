@@ -1,14 +1,26 @@
 
 <section class="content-page">
-  <p class="eyebrow">MÁS ALLÁ DEL AULA</p>
+  <p class="eyebrow">PARTICIPA Y CONECTA</p>
   <h1>Actividades universitarias</h1>
   <p class="page-intro">
-    Descubre oportunidades para aprender, colaborar y desarrollar habilidades.
+    Descubre actividades académicas, colaborativas y culturales
+    para complementar tu vida universitaria.
   </p>
+
+  <div class="resource-actions">
+    <input
+      type="search"
+      name="busqueda"
+      placeholder="Buscar actividades..."
+      aria-label="Buscar actividades universitarias"
+      [ngModel]="busqueda"
+      (ngModelChange)="buscar($event)"
+    />
+  </div>
 
   @if (estado$ | async; as estado) {
     @if (estado.status === 'loading') {
-      <p role="status">Cargando actividades universitarias...</p>
+      <p role="status">Cargando actividades...</p>
     } @else if (estado.status === 'error') {
       <div role="alert">
         <p>{{ estado.mensaje }}</p>
@@ -17,6 +29,10 @@
         </button>
       </div>
     } @else {
+      @if (estado.actividades.length === 0) {
+        <p>No encontramos actividades con esa búsqueda.</p>
+      }
+
       <div class="resource-grid">
         @for (actividad of estado.actividades; track actividad.id) {
           <article class="resource-card">
