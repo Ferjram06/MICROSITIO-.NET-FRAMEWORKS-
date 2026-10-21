@@ -1,19 +1,62 @@
+
+<a class="skip-link" href="#main-content">
+  Saltar al contenido principal
+</a>
+
 <header class="site-header">
-  <a class="brand" routerLink="/inicio" aria-label="Campus Guía, inicio">
-    <span class="brand-icon">C</span>
+  <a
+    class="brand"
+    routerLink="/inicio"
+    aria-label="Campus Guía, inicio"
+  >
+    <span class="brand-icon" aria-hidden="true">C</span>
     <span>Campus Guía</span>
   </a>
 
   <nav class="main-nav" aria-label="Navegación principal">
-    <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
-    <a routerLink="/recursos" routerLinkActive="active">Recursos</a>
-    <a routerLink="/actividades" routerLinkActive="active">Actividades</a>
-    <a routerLink="/explorador" routerLinkActive="active">Explorador</a>
-    <a routerLink="/acerca" routerLinkActive="active">Acerca de</a>
+    <a
+      routerLink="/inicio"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Inicio
+    </a>
+
+    <a
+      routerLink="/recursos"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Recursos
+    </a>
+
+    <a
+      routerLink="/actividades"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Actividades
+    </a>
+
+    <a
+      routerLink="/explorador"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Explorador
+    </a>
+
+    <a
+      routerLink="/acerca"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Acerca de
+    </a>
   </nav>
 </header>
 
-<main class="page-container">
+<main id="main-content" class="page-container" tabindex="-1">
   <router-outlet />
 </main>
 

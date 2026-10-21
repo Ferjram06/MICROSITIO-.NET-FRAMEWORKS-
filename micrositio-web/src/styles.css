@@ -579,3 +579,52 @@ a {
     padding: 18px;
   }
 }
+
+/* ===== ACCESIBILIDAD GLOBAL ===== */
+
+/* Enlace para saltar directamente al contenido */
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  padding: 12px 16px;
+  border: 2px solid #123b52;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #123b52;
+  font-weight: 700;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Indicador de foco visible al navegar con teclado */
+:focus-visible {
+  outline: 3px solid #123b52;
+  outline-offset: 3px;
+}
+
+/* Evita que el ancla de salto quede tapada */
+#main-content {
+  scroll-margin-top: 16px;
+}
+
+/* El contenido principal no necesita un contorno permanente */
+#main-content:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Respeta la preferencia del usuario por menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

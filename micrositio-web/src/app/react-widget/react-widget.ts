@@ -1,4 +1,3 @@
-
 import { createElement } from 'react';
 
 export function ReactWidget() {
