@@ -72,23 +72,29 @@ export class Recursos {
   }
 
   abrirFormulario(): void {
-    this.recursoEditandoId = null;
-    this.nuevoRecurso = this.crearFormularioVacio();
-    this.mensajeAccion = '';
-    this.formularioVisible = true;
-  }
+  this.recursoEditandoId = null;
+  this.nuevoRecurso = this.crearFormularioVacio();
+  this.mensajeAccion = '';
+  this.formularioVisible = true;
+
+  this.desplazarAlFormulario();
+}
 
   editar(recurso: Recurso): void {
-    this.recursoEditandoId = recurso.id;
-    this.nuevoRecurso = {
-      titulo: recurso.titulo,
-      categoria: recurso.categoria,
-      descripcion: recurso.descripcion,
-      url: recurso.url
-    };
-    this.mensajeAccion = '';
-    this.formularioVisible = true;
-  }
+  this.recursoEditandoId = recurso.id;
+
+  this.nuevoRecurso = {
+    titulo: recurso.titulo,
+    categoria: recurso.categoria,
+    descripcion: recurso.descripcion,
+    url: recurso.url
+  };
+
+  this.mensajeAccion = '';
+  this.formularioVisible = true;
+
+  this.desplazarAlFormulario();
+}
 
   cancelarFormulario(): void {
     this.formularioVisible = false;
@@ -151,4 +157,15 @@ export class Recursos {
       url: ''
     };
   }
+  private desplazarAlFormulario(): void {
+  setTimeout(() => {
+    document.getElementById('resource-form')?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth',
+      block: 'start'
+    });
+  }, 0);
 }
+}
+

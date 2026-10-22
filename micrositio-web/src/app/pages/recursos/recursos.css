@@ -1,0 +1,29 @@
+
+.field-help {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.field-error {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid #dc7777;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #a32121;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.resource-form input.ng-invalid.ng-touched {
+  border-color: #c74747;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-error {
+    animation: none;
+  }
+}

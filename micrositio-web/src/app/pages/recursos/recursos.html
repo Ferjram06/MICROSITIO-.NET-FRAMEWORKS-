@@ -22,7 +22,7 @@
   </div>
 
   @if (formularioVisible) {
-    <form class="resource-form" #form="ngForm"
+    <form id="resource-form" class="resource-form" #form="ngForm"
       (ngSubmit)="guardarRecurso()">
 
       <h2>
@@ -55,14 +55,38 @@
         required
       ></textarea>
 
-      <label for="url">URL del recurso</label>
-      <input
-        id="url"
-        name="url"
-        type="url"
-        [(ngModel)]="nuevoRecurso.url"
-        required
-      />
+      
+  <label for="url">URL del recurso</label>
+
+  <input
+    id="url"
+    name="url"
+    type="url"
+    [(ngModel)]="nuevoRecurso.url"
+    #url="ngModel"
+    placeholder="https://ejemplo.com/recurso"
+    pattern="https?://.+"
+    aria-describedby="url-ayuda"
+    required
+  />
+
+  <small id="url-ayuda" class="field-help">
+    Introduce un enlace completo que comience con
+    https:// o http://
+  </small>
+
+  @if (url.invalid && (url.dirty || url.touched)) {
+    <div class="field-error" role="alert">
+      @if (url.errors?.['required']) {
+        <span>⚠️ El enlace es obligatorio.</span>
+      } @else if (url.errors?.['pattern'] || url.errors?.['url']) {
+        <span>⚠️ Formato incorrecto. Ejemplo: https://ejemplo.com</span>
+      } @else {
+        <span>⚠️ Introduce una URL válida, como https://ejemplo.com</span>
+      }
+    </div>
+  }
+
 
       @if (mensajeAccion) {
         <p role="alert">{{ mensajeAccion }}</p>

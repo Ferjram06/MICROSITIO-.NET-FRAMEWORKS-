@@ -1,11 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Micrositio.Api.Data;
 using Micrositio.Api.Models;
 using Micrositio.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<ICampusService, CampusService>();
 
+builder.Services.AddDbContext<CampusDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("CampusGuia")));
+
+builder.Services.AddScoped<ICampusService, CampusService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularFrontend", policy =>
