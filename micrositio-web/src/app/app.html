@@ -19,7 +19,7 @@
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
     >
-      Inicio
+      INICIO
     </a>
 
     <a
@@ -27,7 +27,7 @@
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
     >
-      Recursos
+      RECURSOS
     </a>
 
     <a
@@ -35,7 +35,7 @@
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
     >
-      Actividades
+      ACTIVIDADES
     </a>
 
     <a
@@ -43,7 +43,7 @@
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
     >
-      Explorador
+      EXPLORADOR
     </a>
 
     <a
@@ -51,9 +51,23 @@
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
     >
-      Acerca de
+      ACERCA DE
     </a>
   </nav>
+   <button
+  class="theme-toggle"
+  type="button"
+  (click)="cambiarTema()"
+  [attr.aria-label]="modoOscuro
+    ? 'Cambiar a modo claro'
+    : 'Cambiar a modo oscuro'"
+  [attr.aria-pressed]="modoOscuro"
+  title="Cambiar tema"
+>
+  <span aria-hidden="true">
+    {{ modoOscuro ? '☀' : '☾' }}
+  </span>
+</button>
 </header>
 
 <main id="main-content" class="page-container" tabindex="-1">

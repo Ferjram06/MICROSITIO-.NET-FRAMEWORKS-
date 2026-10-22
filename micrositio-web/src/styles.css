@@ -1,6 +1,47 @@
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/typography.css";
+
+
+/* ===== TEMAS DE CAMPUS GUÍA ===== */
+
+:root {
+  color-scheme: light;
+
+  --page-bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-secondary: #edf5f8;
+  --text-primary: #172b4d;
+  --text-secondary: #52627a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-color: #176b87;
+  --accent-hover: #10546c;
+  --accent-text: #ffffff;
+  --notice-bg: #edf5f8;
+  --notice-text: #36556b;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page-bg: #101c2b;
+  --surface: #192a3b;
+  --surface-secondary: #1d3042;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #b4c2d2;
+  --border-color: #34485c;
+  --accent-color: #7ed4d1;
+  --accent-hover: #a1e5e1;
+  --accent-text: #102b3b;
+  --notice-bg: #1d3042;
+  --notice-text: #d5e7f0;
+}
+
 
 :host {
   display: block;
@@ -107,20 +148,7 @@ a {
   font-weight: 700;
 }
 
-.button-primary {
-  color: #ffffff;
-  background: #176b87;
-}
 
-.button-primary:hover {
-  background: #10546c;
-}
-
-.button-secondary {
-  color: #176b87;
-  border-color: #b7ccd6;
-  background: #ffffff;
-}
 
 .hero-card {
   min-height: 290px;
@@ -363,22 +391,31 @@ a {
    COMPONENTE REACT — CAMPUS GUÍA
    ======================================== */
 
+
+/* ========================================
+   COMPONENTE REACT — CAMPUS GUÍA
+   ======================================== */
+
 .react-widget {
   position: relative;
   margin-top: 36px;
   padding: 30px;
   overflow: hidden;
-  border: 1px solid #dce8ee;
+  border: 1px solid var(--border-color);
   border-radius: 18px;
-  background: linear-gradient(135deg, #ffffff 0%, #edf5f8 100%);
-  color: #172b4d;
-  box-shadow: 0 8px 24px rgba(18, 59, 82, 0.06);
+  background: linear-gradient(
+    135deg,
+    var(--surface) 0%,
+    var(--surface-secondary) 100%
+  );
+  color: var(--text-primary);
+  box-shadow: 0 8px 24px rgba(18, 59, 82, 0.12);
 }
 
 .react-widget span {
   display: inline-block;
   margin-bottom: 12px;
-  color: #176b87;
+  color: var(--accent-color);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -386,7 +423,7 @@ a {
 
 .react-widget h2 {
   margin: 0 0 12px;
-  color: #123b52;
+  color: var(--text-primary);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 800;
   line-height: 1.25;
@@ -395,17 +432,17 @@ a {
 .react-widget p {
   max-width: 600px;
   margin: 0 0 22px;
-  color: #52627a;
+  color: var(--text-secondary);
   font-size: 0.98rem;
   line-height: 1.8;
 }
 
 .react-widget button {
   padding: 12px 18px;
-  border: 0;
+  border: 1px solid var(--accent-color);
   border-radius: 9px;
-  background: #176b87;
-  color: #ffffff;
+  background: var(--accent-color);
+  color: var(--accent-text);
   font: inherit;
   font-size: 0.9rem;
   font-weight: 700;
@@ -414,13 +451,24 @@ a {
 }
 
 .react-widget button:hover {
-  background: #10546c;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   transform: translateY(-2px);
 }
 
 .react-widget button:focus-visible {
-  outline: 3px solid #7ed4d1;
+  outline: 3px solid var(--accent-color);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-widget button {
+    transition: none;
+  }
+
+  .react-widget button:hover {
+    transform: none;
+  }
 }
 
 /* ===== RECURSOS: BÚSQUEDA Y FORMULARIO CRUD ===== */
@@ -627,4 +675,238 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===== APLICACIÓN DE LOS TEMAS ===== */
+
+html,
+body {
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--text-primary);
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-header,
+.site-footer {
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.brand {
+  color: var(--text-primary);
+}
+
+.brand-icon {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.main-nav {
+  color: var(--text-secondary);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--accent-color);
+}
+
+.hero {
+  background: var(--surface-secondary);
+}
+
+.hero-description {
+  color: var(--text-secondary);
+}
+
+-primary {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+
+
+.section-heading > p:last-child,
+.about p,
+.resource-card p,
+.page-intro {
+  color: var(--text-secondary);
+}
+
+.resource-card {
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.resource-card h2,.button
+.resource-card h3 {
+  color: var(--text-primary);
+}
+
+.resource-card a {
+  color: var(--accent-color);
+}
+
+.resource-icon {
+  background: var(--surface-secondary);
+  color: var(--accent-color);
+}
+
+.notice {
+  background: var(--notice-bg);
+  color: var(--notice-text);
+}
+
+.content-page {
+  color: var(--text-primary);
+}
+
+.content-page .resource-actions input,
+.content-page .resource-form input,
+.content-page .resource-form textarea {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.content-page .resource-form {
+  background: var(--surface-secondary);
+  border-color: var(--border-color);
+}
+
+.content-page .resource-form label {
+  color: var(--text-primary);
+}
+
+.content-page .resource-actions button,
+.content-page .resource-form button,
+.content-page .resource-card-actions button {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.content-page .resource-actions button:hover,
+.content-page .resource-form button:hover,
+.content-page .resource-card-actions button:hover {
+  background: var(--accent-hover);
+}
+
+.content-page .resource-form button[type="button"],
+.content-page .resource-card-actions button:last-child {
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.content-page .resource-form button[type="button"]:hover,
+.content-page .resource-card-actions button:last-child:hover {
+  background: var(--surface-secondary);
+}
+
+.react-widget {
+  background: var(--surface-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.react-widget h2 {
+  color: var(--text-primary);
+}
+
+.react-widget p {
+  color: var(--text-secondary);
+}
+
+.react-widget button {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.react-widget button:hover {
+  background: var(--accent-hover);
+}
+/* ===== BOTÓN DE CAMBIO DE TEMA ===== */
+
+.site-header {
+  flex-wrap: wrap;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: var(--border-color);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
+}
+.eyebrow {
+  color: var(--accent-color);
+}
+
+.button-primary {
+  color: var(--accent-text);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.button-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.button-secondary {
+  color: var(--accent-color);
+  border-color: var(--border-color);
+  background: var(--surface);
+}
+
+.button-secondary:hover {
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+  border-color: var(--accent-color);
+}
+
+/* Accesibilidad y colores de los botones de Ionic */
+ion-button {
+  --color: var(--accent-color);
+  --border-color: var(--accent-color);
+  --background: transparent;
+
+  --color-hover: var(--text-primary);
+  --background-hover: var(--surface-secondary);
+
+  --color-focused: var(--accent-color);
+  --background-focused: var(--surface-secondary);
+
+  --ripple-color: var(--accent-color);
+}
+/* Mantener el footer al final de la ventana */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-container {
+  flex: 1 0 auto;
 }

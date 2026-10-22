@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+import { Component, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +13,16 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+  private readonly document = inject(DOCUMENT);
+
+  modoOscuro = false;
+
+  cambiarTema(): void {
+    this.modoOscuro = !this.modoOscuro;
+
+    const tema = this.modoOscuro ? 'dark' : 'light';
+
+    this.document.documentElement.setAttribute('data-theme', tema);
+  }
+}
